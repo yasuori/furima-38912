@@ -13,6 +13,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+
 development:
   <<: *default
   adapter: mysql2
@@ -31,7 +32,6 @@ test:
   password:
   host: localhost
   database: furima-38912_test
-
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
