@@ -5,7 +5,7 @@ usersテーブル
 | Column              | Type         | Options                |
 |---------------------|--------------|------------------------|
 | nickname            | string       | null:false             |
-| email               | string       | null:false             |
+| email               | string       | null:false,unique:true |
 | encrypted_password  | string       | null:false             |
 | last_name           | string       | null:false             |
 | first_name          | string       | null:false             |
@@ -29,6 +29,7 @@ itemsテーブル
 | items_status_id     | integer      | null:false                  | 
 | shipping_date_id    | integer      | null:false                  |  
 | prefecture_id       | integer      | null:false                  |  
+| area_id             | integer      | null:false                  |  
 | price               | integer      | null:false                  |  
 
 Association
