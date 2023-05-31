@@ -7,7 +7,7 @@
                 <mxCell id="6" value="items" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;arcSize=50;" parent="1" vertex="1">
                     <mxGeometry x="-1643" y="40" width="260" height="352" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="created_at&#10;&#10;update_at&#10;&#10;image&#10;&#10;name&#10;&#10;description&#10;&#10;category_id&#10;&#10;item_status_id&#10;&#10;shipping_cost_id&#10;&#10;shipping_data_id&#10;&#10;prefecture_id&#10;&#10;price" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="6" vertex="1">
+                <mxCell id="7" value="created_at&#10;&#10;update_at&#10;&#10;image&#10;&#10;name&#10;&#10;description&#10;&#10;category_id&#10;&#10;item_status_id&#10;&#10;shipping_data_id&#10;&#10;prefecture_id&#10;&#10;price" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="6" vertex="1">
                     <mxGeometry y="30" width="260" height="322" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="users" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;arcSize=50;" parent="1" vertex="1">
