@@ -19,17 +19,15 @@ Association
 
 
 itemsテーブル
-
 | Column              | Type         | Options                     |
 |---------------------|--------------|-----------------------------|
-| user                | references   | null:false,foreign_key:true | 
+| user_id             | references   | null:false,foreign_key:true | 
 | name                | string       | null:false                  | 
 | description         | text         | null:false                  |  
 | category_id         | integer      | null:false                  | 
 | items_status_id     | integer      | null:false                  | 
 | shipping_date_id    | integer      | null:false                  |  
 | prefecture_id       | integer      | null:false                  |  
-| area_id             | integer      | null:false                  |  
 | price               | integer      | null:false                  |  
 
 Association
