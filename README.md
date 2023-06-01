@@ -21,7 +21,7 @@ Association
 itemsテーブル
 | Column              | Type         | Options                     |
 |---------------------|--------------|-----------------------------|
-| user_id             | references   | null:false,foreign_key:true | 
+| user                | references   | null:false,foreign_key:true | 
 | name                | string       | null:false                  | 
 | description         | text         | null:false                  |  
 | category_id         | integer      | null:false                  | 
