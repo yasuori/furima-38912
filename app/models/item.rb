@@ -22,7 +22,7 @@ class Item < ApplicationRecord
    validates :shipping_date_id
 
    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-   validates :prefecture, numericality: {other_than: 0, message: "can't be blank"}
+   validates :prefecture, numericality: {other_than: 0, message: "is invalid. Input half-width characters."}
   end
  
   with_options numericality: { other_than: 0 } do
