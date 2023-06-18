@@ -10,8 +10,6 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
-  validates :content, presence: true, unless: :was_attached?
-
   with_options presence: true do
     validates :image
     validates :name
