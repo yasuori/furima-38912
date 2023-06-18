@@ -9,12 +9,12 @@ RSpec.describe Item, type: :model do
     context '出品登録ができるとき' do
       it '全ての入力事項が、存在すれば登録できる' do
         expect(@item).to be_valid
-     end
-     it '価格が半角数字でかつ300円〜9,999,999円であれば登録できる' do
-      @item.price = 300
-      expect(@item).to be_valid
+      end
+      it '価格が半角数字でかつ300円〜9,999,999円であれば登録できる' do
+        @item.price = 300
+        expect(@item).to be_valid
+      end
     end
-  end
 
     context '商品出品ができないとき' do
       it 'ユーザー登録している人でないと出品できない' do
@@ -103,9 +103,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '半角数字以外の値が含まれている場合は保存できないこと' do
-        @item.price = "１０００"
+        @item.price = '１０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
