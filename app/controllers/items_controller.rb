@@ -21,9 +21,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    return if user_signed_in? && current_user.id == @item.user_id
+
+    redirect_to root_path
   end
 
   def update
@@ -40,8 +40,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-  params.require(:item).permit(:image, :name, :description, :category_id, :item_status_id, :shipping_cost_id,
-  :delivery_area_id, :shipping_date_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :description, :category_id, :item_status_id, :shipping_cost_id,
+                                 :delivery_area_id, :shipping_date_id, :price).merge(user_id: current_user.id)
   end
 
   def set_item
