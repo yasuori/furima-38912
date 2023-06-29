@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2023_06_24_051732) do
     t.integer "category_id", null: false
     t.integer "item_status_id", null: false
     t.integer "shipping_cost_id", null: false
-    t.integer "delivery_area_id", null: false
+    t.integer "prefecture_id", null: false
     t.integer "shipping_date_id", null: false
     t.integer "price", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 2023_06_24_051732) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

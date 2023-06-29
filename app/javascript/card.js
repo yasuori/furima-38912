@@ -1,44 +1,31 @@
 const pay = () => {
-  
-  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
-  
-  const form = document.getElementById("charge-form");
- 
-  form.addEventListener("submit", (e) => {
-  
+  const payjp = Payjp(process.env.PAYJP_PUBLIC_KEY);
+  const elements = payjp.elements();
+  const numberElement = elements.create('cardNumber');
+  const expiryElement = elements.create('cardExpiry');
+  const cvcElement = elements.create('cardCvc');
+
+  numberElement.mount('#card-number');
+  expiryElement.mount('#card-exp-month');
+  expiryElement.mount('#card-exp-year');
+  cvcElement.mount('#card-cvc');
+
+  const submit = document.getElementById("button");
+
+  submit.addEventListener("click", (e) => {
     e.preventDefault();
-   
-    const formResult = document.getElementById("charge-form");
-    const formData = new FormData(formResult);
-
-   
-    const card = {
-      number: formData.get("order_form[number]"),
-      exp_month: formData.get("order_form[exp_month]"),
-      exp_year: `20${formData.get("order_form[exp_year]")}`,
-      cvc: formData.get("order_form[cvc]"),
-    };
-
-   
-    Payjp.createToken(card, (status, response) => {
-      if (status == 200) {
-        
+    payjp.createToken(numberElement).then(function (response) {
+      if (response.error) {
+      } else {
         const token = response.id;
-        
         const renderDom = document.getElementById("charge-form");
-        
-        const tokenObj = `<input value=${token} name='token' type="hidden">`;
-       
+        const tokenObj = `<input value=${token} type="hidden" name='token'>`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
-      
-      document.getElementById("card-number").removeAttribute("name");
-      document.getElementById("card-exp-month").removeAttribute("name");
-      document.getElementById("card-exp-year").removeAttribute("name");
-      document.getElementById("card-cvc").removeAttribute("name");
-
-      
-      document.getElementById("charge-form").submit();
+      numberElement.clear();
+      expiryElement.clear();
+      cvcElement.clear();
+      // document.getElementById("charge-form").submit();
     });
   });
 };

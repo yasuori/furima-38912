@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    #@item_stock = ItemOrder.find(params[:item_id])
     if user_signed_in? && current_user.id != @item.user_id && @item.order == nil
       @item_order = ItemOrder.new
     else
@@ -18,7 +17,7 @@ class OrdersController < ApplicationController
       @item_order.save
       return redirect_to root_path
     else
-      render action: :index
+      render 'index'
     end
   end
 
@@ -33,11 +32,11 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,  
-        card: order_params[:token],    
-        currency: 'jpy'                 
+     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+     Payjp::Charge.create(
+       amount: order_params[:price],
+       card: order_params[:token],    
+       currency: 'jpy'                 
       )
-    end
+   end
 end

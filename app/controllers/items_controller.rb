@@ -3,30 +3,30 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.all.order(created_at: 'DESC')
+    @items = Item.all.order(created_at: "DESC")
+  end
+
+  def show
   end
 
   def new
     @item = Item.new
   end
 
-  def show
-  end
-
   def create
     @item = Item.new(item_params)
-    if @item.valid?
-      @item.save
-      redirect_to root_path
-    else
-      render :new
-    end
+      if @item.valid?
+        @item.save
+        redirect_to root_path
+      else
+        render :new
+      end
   end
 
   def edit
-    return if user_signed_in? && current_user.id == @item.user_id
-
-    redirect_to root_path
+    unless user_signed_in? && current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def update
@@ -38,10 +38,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    return unless user_signed_in? && current_user.id == @item.user_id
-
-    @item.destroy
-    redirect_to root_path
+    if user_signed_in? && current_user.id == @item.user_id
+      @item.destroy
+      redirect_to root_path
+    end
   end
 
   private
@@ -52,6 +52,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :item_status_id, :shipping_cost_id,
-                                 :delivery_area_id, :shipping_date_id, :price).merge(user_id: current_user.id)
+                                 :prefecture_id, :shipping_date_id, :price).merge(user_id: current_user.id)
   end
 end
