@@ -1,20 +1,20 @@
 class OrderForm
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postcode, :prefecture_id, :city, :block, :building, :phone_number, :token
+  attr_accessor :token, :postal_code, :prefecture_id, :city_name, :block_name, :building_name, :phone_number, :item_id, :user_id
 
   with_options presence: true do
-    validates :user_id
-    validates :item_id
-    validates :postcode, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :token, :city_name, :block_name
     validates :prefecture_id, numericality: { other_than: 1 }
-    validates :city
-    validates :block
-    validates :phone_number, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
-    validates :token
+    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
+    validates :phone_number, format: { with: /\A\d{11}\z/ }
+    
+    with_options format: { with: /\A\d{3}[-]\d{4}\z/ } do
+      validates :postal_code, length: { is: 8 } 
+    end
   end
 
-  def save
-    order = Order.create(user_id: user_id, item_id: item_id)
-    Payment.create(order_id: order_id, postcode: postcode, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number)
-  end
+    def save
+      Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city_name: city_name, block_name: block_name, building_name: building_name, phone_number: phone_number)
+      Order.create(user_id: user_id, item_id: item_id)
+    end
 end
