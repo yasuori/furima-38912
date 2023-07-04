@@ -73,7 +73,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Prefecture area must be other than 0')
       end
       it '発送元の地域の情報が空欄だと出品できない' do
-        @item.prefecture_area_id = nil
+        @item.prefecture_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end

@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     # @item_stock = ItemOrder.find(params[:item_id])
-    if user_signed_in? && current_user.id != @item.user_id && @item.order == nil
+    if current_user.id != @item.user_id && @item.order == nil
       @order_form = OrderForm.new
     else
       redirect_to root_path
