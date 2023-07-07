@@ -60,14 +60,14 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include('Postal code is invalid')
       end
       it '都道府県が「---」だと保存できないこと' do
-        @order_form.prefecture_id = nil
+        @order_form.prefecture_id = '1'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Prefecture is not a number")
+        expect(@order_form.errors.full_messages).to include("Prefecture must be other than 1")
       end
       it '都道府県が空だと保存できないこと' do
-        @order_form.prefecture_id = nil
+        @order_form.prefecture_id = '1'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Prefecture is not a number")
+        expect(@order_form.errors.full_messages).to include("Prefecture must be other than 1")
       end
       it '市区町村が空だと保存できないこと' do
         @order_form.city_name = nil
