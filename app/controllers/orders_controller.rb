@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     # @item_stock = ItemOrder.find(params[:item_id])
-    if current_user.id != @item.user_id && @item.order == nil
+    if current_user.id != @item.user_id && @item.order.nil?
       @order_form = OrderForm.new
     else
       redirect_to root_path
@@ -29,15 +29,17 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order_form).permit(:postal_code, :prefecture_id, :city_name, :block_name, :building_name, :phone_number).merge(token: params[:token], item_id: params[:item_id], user_id: current_user.id )
+    params.require(:order_form).permit(:postal_code, :prefecture_id, :city_name, :block_name, :building_name, :phone_number).merge(
+      token: params[:token], item_id: params[:item_id], user_id: current_user.id
+    )
   end
 
   def pay_item
-     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-     Payjp::Charge.create(
-       amount: @item.price,
-       card: order_params[:token],    
-       currency: 'jpy'                 
-      )
-   end
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
+  end
 end
