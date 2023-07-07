@@ -6,11 +6,11 @@ class ItemsController < ApplicationController
     @items = Item.all.order(created_at: 'DESC')
   end
 
-  def new
-    @item = Item.new
+  def show
   end
 
-  def show
+  def new
+    @item = Item.new
   end
 
   def create
@@ -24,9 +24,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if user_signed_in? && current_user.id == @item.user_id
-
-    redirect_to root_path
+    if @item.user_id == current_user.id && @item.order.nil?
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -38,7 +39,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    return unless user_signed_in? && current_user.id == @item.user_id
+    return unless @item.user_id == current_user.id && @item.order.nil?
 
     @item.destroy
     redirect_to root_path
@@ -52,6 +53,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :item_status_id, :shipping_cost_id,
-                                 :delivery_area_id, :shipping_date_id, :price).merge(user_id: current_user.id)
+                                 :prefecture_id, :shipping_date_id, :price).merge(user_id: current_user.id)
   end
 end
